@@ -10,7 +10,7 @@ class DB:
             CREATE TABLE IF NOT EXISTS
             Users (
                 cid INT PRIMARY KEY,
-                name VARCHAR(255),
+                name VARCHAR(255)
                 
             )
         """)
