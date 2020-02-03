@@ -1,10 +1,11 @@
 import chatbot
 import cherrypy
+import os
 import logging
 
 
 WEBHOOK_HOST = 'reptileserver.herokuapp.com'
-WEBHOOK_PORT = 8443  # 443, 80, 88 or 8443 (port need to be 'open')
+WEBHOOK_PORT = int(os.environ.get("PORT", 5000)) # 8443  # 443, 80, 88 or 8443 (port need to be 'open')
 WEBHOOK_LISTEN = '0.0.0.0'  # In some VPS you may need to put here the IP addr
 
 WEBHOOK_SSL_CERT = './webhook_cert.pem'  # Path to the ssl certificate
@@ -19,7 +20,7 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Path to the ssl private key
 # with the same value in you put in WEBHOOK_HOST
 
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
-WEBHOOK_URL_PATH = "/%s/" % (API_TOKEN)
+WEBHOOK_URL_PATH = "/%s/" % "ff"#(API_TOKEN)
 
 
 # WebhookServer, process webhook calls
@@ -33,7 +34,7 @@ class WebhookServer(object):
             json_string = cherrypy.request.body.read(length).decode("utf-8")
             update = chatbot.telebot.types.Update.de_json(json_string)
             chatbot.bot.process_new_updates([update])
-            return ''
+            return 'Hi'
         else:
             raise cherrypy.HTTPError(403)
 
@@ -41,7 +42,7 @@ class WebhookServer(object):
 chatbot.bot.remove_webhook()
 
 # Set webhook
-chatbot.bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH, certificate=open(WEBHOOK_SSL_CERT, 'r'))
+#chatbot.bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH, certificate=open(WEBHOOK_SSL_CERT, 'r'))
 
 # Disable CherryPy requests log
 access_log = cherrypy.log.access_log
