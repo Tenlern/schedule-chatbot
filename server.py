@@ -57,5 +57,5 @@ cherrypy.config.update({
     #'server.ssl_certificate': WEBHOOK_SSL_CERT,
     #'server.ssl_private_key': WEBHOOK_SSL_PRIV
 })
-
+chatbot.bot.polling()
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
