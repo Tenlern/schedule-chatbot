@@ -6,7 +6,7 @@ from database import DB
 
 # Global variables
 database = DB("bot.db")
-bot = telebot.TeleBot("920819851:AAGkDbJD_bGoCPQCteGUR7HAnX3rQJlSyYI")
+bot = telebot.TeleBot(Api_Token)
 
 commands = {
     'start': 'Say welcome to bot',
@@ -43,7 +43,7 @@ def send_today(message):
 @bot.message_handler(content_types=['document', 'photo'])
 def answer_photo_doc(message):
     print('*')
-    bot.send_message(message.chat.id, "Мне кажется, что здесь написано, что ты пидор")
+    bot.send_message(message.chat.id, "Мне кажется, что здесь написано, что ты хороший человек")
 
 
 # Text messages which match regular expression
